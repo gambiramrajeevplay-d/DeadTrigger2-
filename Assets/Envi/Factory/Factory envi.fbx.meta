@@ -1,0 +1,262 @@
+fileFormatVersion: 2
+guid: c451e170b35fbac4891862144d62c034
+ModelImporter:
+  serializedVersion: 21300
+  internalIDToNameTable: []
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Default_OBJ
+    second: {fileID: 2100000, guid: 87a3a39b902a72540a0d2e1bc37d9195, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material
+    second: {fileID: 2100000, guid: a5c870e4c86e3cf419ffc8225e99ff24, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tex_0051_0.dds
+    second: {fileID: 2100000, guid: a2a2457c3ab065142931c7734eec6c1a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tex_0051_0.dds.002
+    second: {fileID: 2100000, guid: 221a50c96d140c24d9eda4c3beb6c4f7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tex_0129_0.dds.001
+    second: {fileID: 2100000, guid: 5bfc4efbdb95f6a46b14a25018cc5f32, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tex_0134_0.dds
+    second: {fileID: 2100000, guid: 14a3617bd27c3ff4d87037eec81e31b1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tex_0135_0.dds.001
+    second: {fileID: 2100000, guid: 04fe6bfe29575374a8a80193e80bd550, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tex_0136_0.dds
+    second: {fileID: 2100000, guid: 4d68a3bd07b6afa42bddc188ee22e280, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tex_0140_0.dds
+    second: {fileID: 2100000, guid: ed04a5822b28a7c459ce7d5e01be122e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tex_0141_0.dds
+    second: {fileID: 2100000, guid: ea43816e60a85bd45ace3b4a3588efde, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tex_0143_0.dds
+    second: {fileID: 2100000, guid: c4904d98c085e9a429eababd2b18a87f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tex_0145_0.dds
+    second: {fileID: 2100000, guid: c09368f9842cc41428036cacd4554a7b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tex_0161_0.dds
+    second: {fileID: 2100000, guid: efd0005070fdf44488fa491433d59b7a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tex_0169_0.dds
+    second: {fileID: 2100000, guid: 32dd84b4491aa0649b4f3417147c84ec, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tex_0169_0.dds.001
+    second: {fileID: 2100000, guid: ae784fdaed277c142915439eb53a181a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tex_0169_0.dds.002
+    second: {fileID: 2100000, guid: e0969191a001f2846b632545453a6d8b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tex_0170_0.dds
+    second: {fileID: 2100000, guid: 142debffcd79a5c45bf90911638fdb4d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tex_0172_0.dds
+    second: {fileID: 2100000, guid: 42871617d486bd7478f9e535a0c0cd00, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: ChatGPT Image Jul 2, 2026, 09_39_40 AM
+    second: {fileID: 2800000, guid: acdc84f21d9cf434685dbea3b4f511a4, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: ChatGPT Image Jul 2, 2026, 09_42_34 AM
+    second: {fileID: 2800000, guid: 97d3dd44e62eae74f800fdc6218a31d9, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: ChatGPT Image Jul 2, 2026, 09_45_26 AM
+    second: {fileID: 2800000, guid: acca793ea63c68746b4ae6daf8566de6, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: ChatGPT Image Jul 2, 2026, 09_58_21 AM
+    second: {fileID: 2800000, guid: 81c8c6d15593a3e428dad6901575f801, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: ChatGPT Image Jul 2, 2026, 10_02_43 AM
+    second: {fileID: 2800000, guid: a2a46902016f9b84e93393398d9b94d1, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Tex_0051_0.dds.002_baseColor
+    second: {fileID: 2800000, guid: 5691c3b05db7f6541aa3f0ddbcf74e44, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Tex_0051_0.dds_baseColor
+    second: {fileID: 2800000, guid: 5126c39a87cc94040bb5e87b9f7c9d99, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Tex_0129_0.dds.001_baseColor
+    second: {fileID: 2800000, guid: 9c8220dbf4cc76744b166ec0591a23a9, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Tex_0140_0.dds_baseColor
+    second: {fileID: 2800000, guid: 57a16af683688bb4d8e1e98882405f04, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Tex_0141_0.dds_baseColor
+    second: {fileID: 2800000, guid: 46f7c19bf312bce4a8132c83f773446e, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Tex_0145_0.dds_baseColor
+    second: {fileID: 2800000, guid: 02c1397aab5290e4ca74cb9234d75196, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Tex_0169_0.dds.001_baseColor
+    second: {fileID: 2800000, guid: 64d5c2821932c4d4893f757b56a7233e, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Tex_0169_0.dds_baseColor
+    second: {fileID: 2800000, guid: 7c7bc0125c15fb74ead2578b6f418358, type: 3}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 1
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    strictVertexDataChecks: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,217 @@
+fileFormatVersion: 2
+guid: 225f311de810e65418fc60b77f710c1b
+ModelImporter:
+  serializedVersion: 21300
+  internalIDToNameTable: []
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: cointainer2
+    second: {fileID: 2100000, guid: cfc0644a07538e64e8aca5f67aa9d3d6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: container
+    second: {fileID: 2100000, guid: 212be52bc825a8d4c98a1696f44dce02, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: drum_1
+    second: {fileID: 2100000, guid: 2ed6ea2c9af296a4e941774af52afdbf, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: env_texture_3
+    second: {fileID: 2100000, guid: 7f88c6d137342c84f9cb14a883171f57, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: fence
+    second: {fileID: 2100000, guid: 8750d823f790f8b49bcbef5c82429acb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ground
+    second: {fileID: 2100000, guid: 2bb1e5b5108a32f4283f9753e165473d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: house
+    second: {fileID: 2100000, guid: d7a2919fcd71d2146b15820a938491a4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: metal_
+    second: {fileID: 2100000, guid: 505e2aa562d8b1e43a611d3428bfb340, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pole
+    second: {fileID: 2100000, guid: 7bf94e3eb0f445145a9bee4da4add277, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: rust tank
+    second: {fileID: 2100000, guid: 240b0adaec1568143a4291db71a52f53, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: wood round
+    second: {fileID: 2100000, guid: 22029b3757bea604185f1999058b38f4, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: 13a6b1cac26a428d8af56f943aa37ab3_RGB_texture_1
+    second: {fileID: 2800000, guid: 18390f0d6b3eab6498508b3a9966ac70, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: 2091e8a6fb4547cf9ec8b936a385b1bb_RGB_Tank
+    second: {fileID: 2800000, guid: 05b74086ea2d5df4a86e5cd3784df876, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: 24c302d75f4e49c99620c0147b1ea2cb_RGB_garage_DefaultMaterial_BaseColor
+    second: {fileID: 2800000, guid: b57a129e65296824a98df11d88a6dd99, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: 406a43ab984343c9b9f84e013a95e21f_RGB_Pole
+    second: {fileID: 2800000, guid: aff955d838f4a224aae3f03bbcf1e4ce, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: 441fd731492e44e585aae0991d630dc5_RGB_Fence
+    second: {fileID: 2800000, guid: a9d20d31de5e8ad4583b6131d61c1a02, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: 47228ba026134e418329e67f95fc2bf4_RGB_Cargo0
+    second: {fileID: 2800000, guid: f4e64245de39a4d4fb01509f838265f4, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: 4dcc4ddf01234ebd933f8a9c9d375b3f_RGB_atlas_factory
+    second: {fileID: 2800000, guid: 77278313ba9a2ca45ab15b4d0269bca1, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: 60edb126d5c34b858f0849cff3d34b87_RGB_texture_3
+    second: {fileID: 2800000, guid: b566964397ecbf64c8298228e82c4e53, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: 6571e6a6c87d4fd69417346ff53327f7_RGB_Reel
+    second: {fileID: 2800000, guid: 55ea7e0cd0bedb14d84d03de7877a464, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: 6cf46b929a4c402981c8459654ef57b9_RGB_drum 1
+    second: {fileID: 2800000, guid: ea02bcc497f5eaa449543b3bc284c17b, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: 81ebb1c6a1a84c51aae100f6af88170c_RGB_texture_4
+    second: {fileID: 2800000, guid: d8eb1a43e547273488c931c1393d8e9f, type: 3}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 1
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    strictVertexDataChecks: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 0.01
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
