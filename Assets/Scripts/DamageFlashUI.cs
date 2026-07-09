@@ -4,27 +4,31 @@ using System.Collections;
 
 public class DamageFlashUI : MonoBehaviour
 {
-    public Image damageImage;
     public float fadeDuration = 2f;
 
+    private Image[] damageImages;
     private Coroutine currentRoutine;
 
     void Start()
     {
-        if (damageImage != null)
+        damageImages = GetComponentsInChildren<Image>(true);
+
+        foreach (Image img in damageImages)
         {
-            damageImage.gameObject.SetActive(false); // 🔥 start hidden
+            img.gameObject.SetActive(false);
         }
     }
 
     public void ShowDamage()
     {
-        if (damageImage == null) return;
+        if (damageImages == null || damageImages.Length == 0)
+            return;
 
-        // 🔥 ENABLE IMAGE
-        damageImage.gameObject.SetActive(true);
+        foreach (Image img in damageImages)
+        {
+            img.gameObject.SetActive(true);
+        }
 
-        // stop previous fade if running
         if (currentRoutine != null)
             StopCoroutine(currentRoutine);
 
@@ -33,49 +37,59 @@ public class DamageFlashUI : MonoBehaviour
 
     IEnumerator FadeRoutine()
     {
-        Color c = damageImage.color;
+        // Start invisible
+        foreach (Image img in damageImages)
+        {
+            Color c = img.color;
+            c.a = 0f;
+            img.color = c;
+        }
 
-        // start invisible
-        c.a = 0f;
-        damageImage.color = c;
-
-        // =========================
-        // FADE IN
-        // =========================
         float fadeInTime = 0.15f;
         float t = 0f;
 
+        // Fade In
         while (t < fadeInTime)
         {
             t += Time.deltaTime;
+            float alpha = Mathf.Lerp(0f, 1f, t / fadeInTime);
 
-            c.a = Mathf.Lerp(0f, 1f, t / fadeInTime);
-            damageImage.color = c;
+            foreach (Image img in damageImages)
+            {
+                Color c = img.color;
+                c.a = alpha;
+                img.color = c;
+            }
 
             yield return null;
         }
 
-        // small hold
         yield return new WaitForSeconds(0.05f);
 
-        // =========================
-        // FADE OUT
-        // =========================
+        // Fade Out
         t = 0f;
 
         while (t < fadeDuration)
         {
             t += Time.deltaTime;
+            float alpha = Mathf.Lerp(1f, 0f, t / fadeDuration);
 
-            c.a = Mathf.Lerp(1f, 0f, t / fadeDuration);
-            damageImage.color = c;
+            foreach (Image img in damageImages)
+            {
+                Color c = img.color;
+                c.a = alpha;
+                img.color = c;
+            }
 
             yield return null;
         }
 
-        c.a = 0f;
-        damageImage.color = c;
-
-        damageImage.gameObject.SetActive(false);
+        foreach (Image img in damageImages)
+        {
+            Color c = img.color;
+            c.a = 0f;
+            img.color = c;
+            img.gameObject.SetActive(false);
+        }
     }
 }

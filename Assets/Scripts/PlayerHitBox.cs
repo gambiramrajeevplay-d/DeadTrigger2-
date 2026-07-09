@@ -3,7 +3,7 @@
 public class PlayerHitBox : MonoBehaviour
 {
     public PlayerHealth playerHealth;
- //   public DamageFlashUI damageUI; // 🔥 IMPORTANT
+    public DamageFlashUI damageUI; // 🔥 IMPORTANT
 
     public void Hit(int damage)
     {
@@ -12,16 +12,16 @@ public class PlayerHitBox : MonoBehaviour
         if (playerHealth != null)
             playerHealth.TakeDamage(damage, "Enemy");
 
-        // 🔥 SHOW DAMAGE UI
+       //  🔥 SHOW DAMAGE UI
         //if (damageUI != null)
         //{
-        //   // Debug.Log("SHOWING DAMAGE UI"); // 🔥 DEBUG
+        //    // Debug.Log("SHOWING DAMAGE UI"); // 🔥 DEBUG
         //    damageUI.ShowDamage();
         //}
-        else
-        {
-           // Debug.LogError("Damage UI NOT ASSIGNED!");
-        }
+        //else
+        //{
+        //   Debug.LogError("Damage UI NOT ASSIGNED!");
+        //}
     }
     
 }

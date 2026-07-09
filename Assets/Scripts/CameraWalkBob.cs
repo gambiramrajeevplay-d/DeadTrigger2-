@@ -16,6 +16,14 @@ public class CameraWalkBob : MonoBehaviour
     float timer;
     Vector3 startPos;
 
+    [Header("Hit Shake")]
+    public float hitShakeAmount = 0.08f;
+    public float hitShakeDuration = 0.18f;
+    public float hitShakeSpeed = 35f;
+
+    private float shakeTimer;
+
+
     void Start()
     {
         startPos = transform.localPosition;
@@ -43,9 +51,24 @@ public class CameraWalkBob : MonoBehaviour
             timer = Mathf.Lerp(timer, 0f, Time.deltaTime * 8f);
         }
 
+        if (shakeTimer > 0f)
+        {
+            shakeTimer -= Time.deltaTime;
+
+            float strength = shakeTimer / hitShakeDuration;
+
+            targetPos.x += Mathf.Sin(Time.time * hitShakeSpeed) * hitShakeAmount * strength;
+        }
+
+
         transform.localPosition = Vector3.Lerp(
             transform.localPosition,
             targetPos,
             smoothSpeed * Time.deltaTime);
+    }
+    public void ShakeOnHit()
+    {
+        shakeTimer = hitShakeDuration;
+
     }
 }

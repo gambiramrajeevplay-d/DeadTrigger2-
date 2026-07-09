@@ -258,7 +258,7 @@ public class PlayerAutoMove : MonoBehaviour
             Enemy enemy = currentHitBox.GetComponentInParent<Enemy>();
 
             if (enemy != null &&
-                !enemy.IsDead &&
+                !enemy.HasFinishedDeath &&
                 currentHitBox.gameObject.activeInHierarchy)
             {
                 return;

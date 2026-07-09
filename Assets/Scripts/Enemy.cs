@@ -42,6 +42,8 @@ public class Enemy : MonoBehaviour
     private bool isAttacking;
     public bool IsDead => isDead;
 
+    private bool isHit;
+    public float hitDuration = 0.25f;
 
     public enum DropType
     {
@@ -63,8 +65,13 @@ public class Enemy : MonoBehaviour
     public float dropJumpHeight = 1f;
     public float dropJumpDuration = 0.5f;
 
+    private DamageFlashUI damageFlash;
+    public bool HasFinishedDeath { get; private set; }
+
     void Start()
     {
+        damageFlash = FindFirstObjectByType<DamageFlashUI>(FindObjectsInactive.Include);
+
         currentHealth = maxHealth;
 
         if (healthBar != null)
@@ -98,8 +105,11 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
+
+
         if (isDead || playerHitBox == null)
             return;
+
 
         float distance = Vector3.Distance(transform.position, playerHitBox.transform.position);
 
@@ -131,42 +141,61 @@ public class Enemy : MonoBehaviour
         {
             animator.SetBool("isRunning", false);
             StopIdleRunSound();
-
-            if (Time.time >= nextAttackTime)
+            if (!isAttacking && Time.time >= nextAttackTime)
             {
                 nextAttackTime = Time.time + attackCooldown;
-
                 StartCoroutine(AttackRoutine());
-
-              
             }
         }
     }
+
+   public void DealDamage()
+    {
+        if (isDead || playerHitBox == null)
+            return;
+
+        if (Vector3.Distance(transform.position, playerHitBox.transform.position) <= attackRange + 0.2f)
+        {
+            playerHitBox.Hit(damage);
+
+            if (damageFlash != null)
+                damageFlash.ShowDamage();
+
+            CameraWalkBob camBob = FindFirstObjectByType<CameraWalkBob>();
+
+            if (camBob != null)
+                camBob.ShakeOnHit();
+
+        }
+    }
+
     public void PlayAttackSound()
     {
         if (isDead || attackSound == null)
             return;
 
+
         sfxAudio.PlayOneShot(attackSound);
+
     }
     IEnumerator AttackRoutine()
     {
+        isAttacking = true;
+
         animator.SetTrigger("isAttacking");
-        
 
+        while (!animator.GetCurrentAnimatorStateInfo(0).IsName("Mutant Swiping"))
+            yield return null;
 
-        yield return new WaitForSeconds(0.45f);
+        while (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 0.35f)
+            yield return null;
 
-        if (!isDead &&
-            Vector3.Distance(transform.position, playerHitBox.transform.position) <= attackRange + 0.2f)
-        {
-            playerHitBox.Hit(damage);
-        }
+        DealDamage();
 
-        yield return new WaitForSeconds(attackSound != null ? attackSound.length - 0.45f : 0f);
+        while (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f)
+            yield return null;
 
-        if (!isDead)
-            PlayIdleRunSound();
+        isAttacking = false;
     }
     void PlayIdleRunSound()
     {
@@ -205,27 +234,42 @@ public class Enemy : MonoBehaviour
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
 
         if (healthBar != null)
-            healthBar.UpdateHealth((float)currentHealth / maxHealth);
+            healthBar.UpdateHealth((float) currentHealth / maxHealth);
 
         if (currentHealth <= 0)
+        {
             Die();
-    }
+            return;
+        }
 
+        if (!isHit)
+            StartCoroutine(HitRoutine());
+    }
+    IEnumerator HitRoutine()
+{
+    isHit = true;
+
+    animator.ResetTrigger("isAttacking");
+    animator.SetTrigger("Hit");
+
+    yield return new WaitForSeconds(hitDuration);
+
+    isHit = false;
+
+    float distance = Vector3.Distance(transform.position, playerHitBox.transform.position);
+
+    if (distance > attackRange)
+        animator.SetBool("isRunning", true);
+}
     void Die()
     {
         if (isDead)
             return;
 
         isDead = true;
-        PlayerAutoMove player = FindObjectOfType<PlayerAutoMove>();
+      
 
-        if (player != null)
-        {
-            HitBox hitBox = GetComponentInChildren<HitBox>();
-
-            if (hitBox != null)
-                player.ClearTarget(hitBox);
-        }
+       
         // Notify GameManager
         if (GameManager_Temp.Instance != null)
             GameManager_Temp.Instance.ZombieDied(this);
@@ -263,8 +307,21 @@ public class Enemy : MonoBehaviour
             yield return new WaitForSeconds(0.15f);
         }
 
+        HasFinishedDeath = true;
         gameObject.SetActive(false);
+
+        // Tell player the enemy is finally gone
+        PlayerAutoMove player = FindObjectOfType<PlayerAutoMove>();
+
+        if (player != null)
+        {
+            HitBox hitBox = GetComponentInChildren<HitBox>();
+
+            if (hitBox != null)
+                player.ClearTarget(hitBox);
+        }
     }
+
     void SpawnDrop()
     {
         GameObject prefab = null;

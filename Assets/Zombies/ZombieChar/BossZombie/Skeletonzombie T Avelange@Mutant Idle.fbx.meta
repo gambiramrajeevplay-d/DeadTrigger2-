@@ -8,6 +8,16 @@ ModelImporter:
     second: Mutant Idle
   externalObjects:
   - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: skeletonZombie_Material
+    second: {fileID: 2100000, guid: 97f0928340dd6744ebce6b98cb917914, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: skeletonZombie_Material1
+    second: {fileID: 2100000, guid: cff97032856313046bdbb9516df159c4, type: 2}
+  - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: skeletonZombie_body_diffuse

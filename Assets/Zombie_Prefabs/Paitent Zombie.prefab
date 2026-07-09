@@ -686,16 +686,19 @@ MonoBehaviour:
   attackRange: 2
   rotationSpeed: 8
   damage: 3
-  attackCooldown: 1.2
+  attackCooldown: 3
   animator: {fileID: 3317577904155761083}
   healthBar: {fileID: 3317577904155761076}
   idleRunSound: {fileID: 8300000, guid: 6c33d656ff8599845a3bbce42bef1453, type: 3}
   attackSound: {fileID: 8300000, guid: 69ab6a9e43c03524395a06c5c0cb2b0d, type: 3}
   deathSound: {fileID: 8300000, guid: 48d6838d7949a364fabf88629b60b868, type: 3}
+  hitDuration: 0.25
   dropType: 2
   healthPackPrefab: {fileID: 7254512489434034613, guid: 157dc72c7da5576428412cfaa1edf19f, type: 3}
   bulletSetPrefab: {fileID: 165497170395920723, guid: 5f2da2256a74cd948b1029e4ada39477, type: 3}
   dropOffset: {x: 0, y: 0.3, z: -5}
+  dropJumpHeight: 1
+  dropJumpDuration: 0.5
 --- !u!114 &3317577904155761076
 MonoBehaviour:
   m_ObjectHideFlags: 0
