@@ -184,8 +184,17 @@ public class Enemy : MonoBehaviour
 
         animator.SetTrigger("isAttacking");
 
-        while (!animator.GetCurrentAnimatorStateInfo(0).IsName("Mutant Swiping"))
+        while (true)
+        {
+            AnimatorStateInfo state = animator.GetCurrentAnimatorStateInfo(0);
+
+            if (state.IsName("Mutant Swiping") || state.IsName("Zombie Attack"))
+                break;
+
             yield return null;
+        }
+
+
 
         while (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 0.35f)
             yield return null;
