@@ -14,6 +14,7 @@ public class PlayerHealth : MonoBehaviour
     private Image healthFill;
     private TextMeshProUGUI healthText;
 
+
     void Start()
     {
         currentHealth = maxHealth;
