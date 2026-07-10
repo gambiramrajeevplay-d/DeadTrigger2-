@@ -23,5 +23,22 @@ public class PlayerHitBox : MonoBehaviour
         //   Debug.LogError("Damage UI NOT ASSIGNED!");
         //}
     }
-    
+    private Enemy currentAttacker;
+
+    public bool CanDamage(Enemy enemy)
+    {
+        if (currentAttacker == null || currentAttacker.IsDead)
+        {
+            currentAttacker = enemy;
+            return true;
+        }
+
+        return currentAttacker == enemy;
+    }
+
+    public void ReleaseAttacker(Enemy enemy)
+    {
+        if (currentAttacker == enemy)
+            currentAttacker = null;
+    }
 }

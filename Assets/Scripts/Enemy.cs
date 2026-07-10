@@ -124,6 +124,10 @@ public class Enemy : MonoBehaviour
 
         if (distance > attackRange)
         {
+
+            playerHitBox.ReleaseAttacker(this);
+
+
             animator.SetBool("isRunning", true);
             PlayIdleRunSound();
 
@@ -156,16 +160,17 @@ public class Enemy : MonoBehaviour
 
         if (Vector3.Distance(transform.position, playerHitBox.transform.position) <= attackRange + 0.2f)
         {
-            playerHitBox.Hit(damage);
+            if (playerHitBox.CanDamage(this))
+            {
+                playerHitBox.Hit(damage);
 
-            if (damageFlash != null)
-                damageFlash.ShowDamage();
+                if (damageFlash != null)
+                    damageFlash.ShowDamage();
 
-            CameraWalkBob camBob = FindFirstObjectByType<CameraWalkBob>();
-
-            if (camBob != null)
-                camBob.ShakeOnHit();
-
+                CameraWalkBob camBob = FindFirstObjectByType<CameraWalkBob>();
+                if (camBob != null)
+                    camBob.ShakeOnHit();
+            }
         }
     }
 
@@ -199,7 +204,7 @@ public class Enemy : MonoBehaviour
         while (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 0.35f)
             yield return null;
 
-        DealDamage();
+       // DealDamage();
 
         while (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f)
             yield return null;
@@ -317,7 +322,11 @@ public class Enemy : MonoBehaviour
         }
 
         HasFinishedDeath = true;
+       
         gameObject.SetActive(false);
+        if (playerHitBox != null)
+            playerHitBox.ReleaseAttacker(this);
+
 
         // Tell player the enemy is finally gone
         PlayerAutoMove player = FindObjectOfType<PlayerAutoMove>();
