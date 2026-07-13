@@ -105,11 +105,8 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-
-
         if (isDead || playerHitBox == null)
             return;
-
 
         float distance = Vector3.Distance(transform.position, playerHitBox.transform.position);
 
@@ -124,27 +121,53 @@ public class Enemy : MonoBehaviour
 
         if (distance > attackRange)
         {
-
             playerHitBox.ReleaseAttacker(this);
-
 
             animator.SetBool("isRunning", true);
             PlayIdleRunSound();
 
+            // Move towards player
             Vector3 dir = (playerHitBox.transform.position - transform.position).normalized;
             dir.y = 0;
 
+            // Keep distance from nearby zombies
+            Vector3 separation = Vector3.zero;
+
+            Enemy[] enemies = FindObjectsByType<Enemy>(
+                FindObjectsInactive.Exclude,
+                FindObjectsSortMode.None);
+
+            foreach (Enemy other in enemies)
+            {
+                if (other == this || other.IsDead)
+                    continue;
+
+                Vector3 offset = transform.position - other.transform.position;
+                offset.y = 0;
+
+                float dist = offset.magnitude;
+                float desiredGap = 1.2f; // Adjust this
+
+                if (dist < desiredGap && dist > 0.01f)
+                {
+                    separation += offset.normalized * ((desiredGap - dist) / desiredGap);
+                }
+            }
+
+            Vector3 moveDir = (dir + separation * 2f).normalized;
+
             transform.rotation = Quaternion.Slerp(
                 transform.rotation,
-                Quaternion.LookRotation(dir),
+                Quaternion.LookRotation(moveDir),
                 rotationSpeed * Time.deltaTime);
 
-            transform.position += dir * moveSpeed * Time.deltaTime;
+            transform.position += moveDir * moveSpeed * Time.deltaTime;
         }
         else
         {
             animator.SetBool("isRunning", false);
             StopIdleRunSound();
+
             if (!isAttacking && Time.time >= nextAttackTime)
             {
                 nextAttackTime = Time.time + attackCooldown;
@@ -153,7 +176,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-   public void DealDamage()
+    public void DealDamage()
     {
         if (isDead || playerHitBox == null)
             return;
@@ -193,7 +216,7 @@ public class Enemy : MonoBehaviour
         {
             AnimatorStateInfo state = animator.GetCurrentAnimatorStateInfo(0);
 
-            if (state.IsName("Mutant Swiping") || state.IsName("Zombie Attack"))
+            if (state.IsName("Mutant Swiping") || state.IsName("Zombie Attack")|| state.IsName("PoliceZombieAttack"))
                 break;
 
             yield return null;

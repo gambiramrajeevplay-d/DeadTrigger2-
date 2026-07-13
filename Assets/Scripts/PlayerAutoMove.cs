@@ -88,6 +88,8 @@ public class PlayerAutoMove : MonoBehaviour
             return;
         }
 
+        ammoText = GameObject.FindGameObjectWithTag("AmmoText").GetComponent<TMP_Text>();
+
         currentAmmo = totalAmmo;
         UpdateAmmoUI();
 

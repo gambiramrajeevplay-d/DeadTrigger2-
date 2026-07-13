@@ -9,6 +9,7 @@ TagManager:
   - Health_Text
   - Level
   - BulletSet
+  - AmmoText
   layers:
   - Default
   - TransparentFX
