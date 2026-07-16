@@ -105,5 +105,11 @@ public class PlayerHealth : MonoBehaviour
 
         if (player != null)
             player.KillPlayer();
+
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.OnPlayerDied();
+        }
+
     }
 }

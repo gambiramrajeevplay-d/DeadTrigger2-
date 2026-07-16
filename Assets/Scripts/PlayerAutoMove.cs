@@ -66,6 +66,8 @@ public class PlayerAutoMove : MonoBehaviour
     public int currentAmmo = 25;    // Current ammo
     public TMP_Text ammoText;       // UI Text
 
+    [SerializeField] private GameObject shootButton;
+
 
     void Start()
     {
@@ -112,18 +114,27 @@ public class PlayerAutoMove : MonoBehaviour
           
         }
 
-       
+        shootButton = GameObject.FindGameObjectWithTag("ShootButton");
+
+        if (shootButton != null)
+        {
+            shootButton.SetActive(false);
+        }
+
 
         footstepSource = gameObject.AddComponent<AudioSource>();
         footstepSource.clip = footstepSound;
         footstepSource.loop = true;
         footstepSource.spatialBlend = 1f;
 
-       
+        SetupControls();
 
     }
     void Update()
     {
+        if (shootBlockTimer > 0f)
+            shootBlockTimer -= Time.deltaTime;
+
         DetectEnemy();
 
         bool fireInput =
@@ -131,11 +142,23 @@ public class PlayerAutoMove : MonoBehaviour
             Input.GetMouseButton(0) ||
             Input.GetKey(KeyCode.JoystickButton0);
 
-        if (fireInput &&
-          currentHitBox != null &&
-          currentAmmo > 0 &&
-          !isShooting &&
-          Time.time >= nextFireTime)
+        // Wait until all fire buttons are released
+        if (waitForFireRelease)
+        {
+            if (!fireInput)
+                waitForFireRelease = false;
+
+            UpdateWeaponRecoil();
+            UpdateAim();
+            return;
+        }
+
+        if (shootBlockTimer <= 0f &&
+            fireInput &&
+            currentHitBox != null &&
+            currentAmmo > 0 &&
+            !isShooting &&
+            Time.time >= nextFireTime)
         {
             nextFireTime = Time.time + fireRate;
             StartCoroutine(ShootRoutine());
@@ -255,6 +278,13 @@ public class PlayerAutoMove : MonoBehaviour
 
     void DetectEnemy()
     {
+        if (PlatformManager.Instance != null &&
+    PlatformManager.Instance.IsMobile() &&
+    shootButton != null)
+        {
+            shootButton.SetActive(currentHitBox != null);
+        }
+
         if (currentHitBox != null)
         {
             Enemy enemy = currentHitBox.GetComponentInParent<Enemy>();
@@ -339,6 +369,17 @@ public class PlayerAutoMove : MonoBehaviour
         isShooting = false;
     }
 
+    private bool waitForFireRelease;
+
+    public void ForceStopShooting()
+    {
+        StopAllCoroutines();
+
+        isShooting = false;
+        nextFireTime = Time.time + 0.2f;
+
+        waitForFireRelease = true;
+    }
     void UpdateAim()
     {
         if (aimSprite == null || mainCamera == null)
@@ -405,13 +446,71 @@ public class PlayerAutoMove : MonoBehaviour
     {
         yield return new WaitForSeconds(3f);
 
-        //if (GameManager.Instance != null)
-        //    GameManager.Instance.OnPlayerDied();
+        if (GameManager.Instance != null)
+           GameManager.Instance.OnPlayerDied();
     }
 
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, detectionRadius);
+    }
+
+  
+    private float shootBlockTimer = 0f;
+    public void BlockShootInput(float duration)
+    {
+        shootBlockTimer = duration;
+    }
+
+    public void StartGameplay()
+    {
+        gameStarted = true;
+
+        anim.updateMode =
+            AnimatorUpdateMode.Normal;
+    }
+    public void MobileShoot()
+    {
+        if (!gameStarted)
+            return;
+
+        if (currentHitBox == null)
+            return;
+
+        if (currentAmmo <= 0)
+            return;
+
+        if (isShooting)
+            return;
+
+        if (Time.time < nextFireTime)
+            return;
+
+        nextFireTime = Time.time + fireRate;
+
+        StartCoroutine(ShootRoutine());
+    }
+    void SetupControls()
+    {
+        GameObject btnObj =
+            GameObject.FindGameObjectWithTag("ShootButton");
+
+        if (btnObj == null)
+            return;
+
+        if (PlatformManager.Instance.IsMobile())
+        {
+            btnObj.SetActive(true);
+
+            Button btn = btnObj.GetComponent<Button>();
+
+            btn.onClick.RemoveAllListeners();
+            btn.onClick.AddListener(MobileShoot);
+        }
+        else
+        {
+            btnObj.SetActive(false);
+        }
     }
 }

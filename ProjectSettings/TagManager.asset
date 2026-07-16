@@ -10,6 +10,11 @@ TagManager:
   - Level
   - BulletSet
   - AmmoText
+  - Giveborder
+  - border
+  - Pass
+  - Fail
+  - ShootButton
   layers:
   - Default
   - TransparentFX

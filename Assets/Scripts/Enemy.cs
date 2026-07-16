@@ -308,8 +308,8 @@ public class Enemy : MonoBehaviour
 
        
         // Notify GameManager
-        if (GameManager_Temp.Instance != null)
-            GameManager_Temp.Instance.ZombieDied(this);
+        if (GameManager.Instance != null)
+            GameManager.Instance?.ZombieDied(this);
 
         loopAudio.Stop();
 
