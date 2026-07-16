@@ -279,10 +279,10 @@ public class PlayerAutoMove : MonoBehaviour
     void DetectEnemy()
     {
         if (PlatformManager.Instance != null &&
-    PlatformManager.Instance.IsMobile() &&
-    shootButton != null)
+     PlatformManager.Instance.IsMobile() &&
+     shootButton != null)
         {
-            shootButton.SetActive(currentHitBox != null);
+            shootButton.SetActive(true);
         }
 
         if (currentHitBox != null)
