@@ -48,6 +48,9 @@ public class GameManager : MonoBehaviour
     public TMP_Text winRewardText;
     public TMP_Text loseRewardText;
 
+    private GameObject instructUI;
+
+
     void Awake()
     {
         if (Instance == null)
@@ -66,6 +69,9 @@ public class GameManager : MonoBehaviour
         if (resultCamera != null)
             resultCamera.gameObject.SetActive(false);
 
+        instructUI = GameObject.FindGameObjectWithTag("Instruct");
+
+      
         // 🔥 AUTO FIND UI
 
         if (winPanel == null)
@@ -114,6 +120,8 @@ public class GameManager : MonoBehaviour
         totalZombies = aliveZombies.Count;
         killedZombies = 0;
 
+
+
         UpdateKillUI();
 
         Debug.Log("Zombies Found: " + totalZombies);
@@ -123,6 +131,10 @@ public class GameManager : MonoBehaviour
     }
     public void StartGame()
     {
+
+        if (instructUI != null)
+            instructUI.SetActive(false);
+
         Time.timeScale = 1f;
 
         AudioListener.pause = false;
@@ -363,7 +375,7 @@ public class GameManager : MonoBehaviour
     }
     void UpdateKillUI()
     {
-        string text = $"Kills : {killedZombies}/{totalZombies}";
+        string text = $"{killedZombies}/{totalZombies}";
 
         if (winKillText != null)
             winKillText.text = text;

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
+using Script;
 
 public class PlayerAutoMove : MonoBehaviour
 {
@@ -66,7 +67,7 @@ public class PlayerAutoMove : MonoBehaviour
     public int currentAmmo = 25;    // Current ammo
     public TMP_Text ammoText;       // UI Text
 
-    [SerializeField] private GameObject shootButton;
+    [SerializeField] private Button shootButton;
 
 
     void Start()
@@ -114,11 +115,20 @@ public class PlayerAutoMove : MonoBehaviour
           
         }
 
-        shootButton = GameObject.FindGameObjectWithTag("ShootButton");
+        GameObject btnObj = GameObject.FindGameObjectWithTag("ShootButton");
 
-        if (shootButton != null)
+        if (btnObj != null)
         {
-            shootButton.SetActive(false);
+            shootButton = btnObj.GetComponent<Button>();
+
+            if (shootButton != null)
+            {
+                shootButton.gameObject.SetActive(true);
+            }
+        }
+        else
+        {
+            Debug.LogError("ShootButton not found!");
         }
 
 
@@ -139,7 +149,7 @@ public class PlayerAutoMove : MonoBehaviour
 
         bool fireInput =
             Input.GetKey(KeyCode.Space) ||
-            Input.GetMouseButton(0) ||
+            
             Input.GetKey(KeyCode.JoystickButton0);
 
         // Wait until all fire buttons are released
@@ -278,12 +288,11 @@ public class PlayerAutoMove : MonoBehaviour
 
     void DetectEnemy()
     {
-        if (PlatformManager.Instance != null &&
-     PlatformManager.Instance.IsMobile() &&
-     shootButton != null)
+        if (shootButton != null)
         {
-            shootButton.SetActive(true);
+            shootButton.gameObject.SetActive(!AndroidTV.IsAndroidOrFireTv());
         }
+    
 
         if (currentHitBox != null)
         {
@@ -472,45 +481,79 @@ public class PlayerAutoMove : MonoBehaviour
     }
     public void MobileShoot()
     {
+        Debug.Log("Shoot button pressed");
+
         if (!gameStarted)
+        {
+            Debug.Log("gameStarted = false");
             return;
+        }
 
         if (currentHitBox == null)
+        {
+            Debug.Log("No target");
             return;
+        }
 
         if (currentAmmo <= 0)
+        {
+            Debug.Log("No ammo");
             return;
+        }
 
         if (isShooting)
+        {
+            Debug.Log("Already shooting");
             return;
+        }
 
         if (Time.time < nextFireTime)
+        {
+            Debug.Log("Fire rate blocked");
             return;
+        }
+
+        Debug.Log("Starting ShootRoutine");
 
         nextFireTime = Time.time + fireRate;
-
         StartCoroutine(ShootRoutine());
     }
     void SetupControls()
     {
-        GameObject btnObj =
-            GameObject.FindGameObjectWithTag("ShootButton");
+        Debug.Log("SetupControls called");
+
+        GameObject btnObj = GameObject.FindGameObjectWithTag("ShootButton");
 
         if (btnObj == null)
+        {
+            Debug.LogError("ShootButton not found");
             return;
-
-        if (PlatformManager.Instance.IsMobile())
-        {
-            btnObj.SetActive(true);
-
-            Button btn = btnObj.GetComponent<Button>();
-
-            btn.onClick.RemoveAllListeners();
-            btn.onClick.AddListener(MobileShoot);
         }
-        else
+
+        Button btn = btnObj.GetComponent<Button>();
+
+        if (btn == null)
         {
-            btnObj.SetActive(false);
+            Debug.LogError("Button component missing");
+            return;
         }
+
+        // Hide on Android TV / Fire TV
+        if (AndroidTV.IsAndroidOrFireTv())
+        {
+            btn.gameObject.SetActive(false);
+          
+            return;
+        }
+
+       
+
+        // Show on mobile
+        btn.gameObject.SetActive(true);
+
+        btn.onClick.RemoveAllListeners();
+        btn.onClick.AddListener(MobileShoot);
+
+        Debug.Log("Listener added");
     }
 }

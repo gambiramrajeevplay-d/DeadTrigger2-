@@ -20,9 +20,10 @@ public class Pauser : MonoBehaviour
     // 🔒 GLOBAL PAUSE LOCK
     public static bool PauseLocked = false;
 
+    private AudioListener[] audioListeners;
 
-
-   private void Awake()
+    private GameObject inGameUI;
+    private void Awake()
    {
     instance = this;
     AudioManagerPause.Initialize();
@@ -39,14 +40,23 @@ public class Pauser : MonoBehaviour
 
     void Start()
     {
-        // 🔒 ALWAYS LOCK IN TUTORIAL
         if (SceneManager.GetActiveScene().name == "Tutorial")
         {
             PauseLocked = true;
         }
 
+        inGameUI = GameObject.FindGameObjectWithTag("InGame");
+
+        if (inGameUI == null)
+        {
+            Debug.LogWarning("No GameObject with tag 'InGame' found.");
+        }
         PauseButton.SetActive(!AndroidTV.IsAndroidOrFireTv());
         UpdateSoundIcon();
+
+        audioListeners = FindObjectsByType<AudioListener>(
+            FindObjectsInactive.Include,
+            FindObjectsSortMode.None);
     }
 
     void Update()
@@ -74,62 +84,63 @@ public class Pauser : MonoBehaviour
 
     public void Pause()
     {
-
-        if (PauseLocked) return;
+        if (PauseLocked)
+            return;
 
         PausePannel.SetActive(true);
-       LevelObject.SetActive(false);
+
+        if (inGameUI != null)
+            inGameUI.SetActive(false);
 
         if (!AndroidTV.IsAndroidOrFireTv())
             PauseButton.SetActive(false);
 
-        PlayerAutoMove player =
-        FindObjectOfType<PlayerAutoMove>();
+        PlayerAutoMove player = FindObjectOfType<PlayerAutoMove>();
 
         if (player != null)
-        {
             player.ForceStopShooting();
-        }
 
         Time.timeScale = 0f;
 
+        // Pause all audio
+        AudioListener.pause = true;
+
         UpdateSoundIcon();
+
         GameManager.Instance.resultCamera.gameObject.SetActive(true);
-        
     }
 
     public void Resume()
     {
         GameManager.Instance.resultCamera.gameObject.SetActive(false);
+
         PausePannel.SetActive(false);
-        LevelObject.SetActive(true);
+
+        if (inGameUI != null)
+            inGameUI.SetActive(true);
 
         if (!AndroidTV.IsAndroidOrFireTv())
             PauseButton.SetActive(true);
 
         Time.timeScale = 1f;
 
-        // 🔥 FIX MOBILE SHOOT AFTER PAUSE
-        PlayerAutoMove player =
-            FindObjectOfType<PlayerAutoMove>();
+        // Resume all audio
+        AudioListener.pause = false;
+
+        PlayerAutoMove player = FindObjectOfType<PlayerAutoMove>();
 
         if (player != null)
         {
             player.ForceStopShooting();
-
-            // 🔥 BLOCK SPACE INPUT AFTER RESUME
             player.BlockShootInput(0.2f);
-        }
-
-        if (player != null)
-        {
-            player.ForceStopShooting();
         }
     }
     public void MM()
     {
-        Time.timeScale = 1f;   // 🔥 MUST RESET FIRST
-        PauseLocked = false;   // 🔥 reset lock
+        Time.timeScale = 1f;
+        PauseLocked = false;
+
+        AudioListener.pause = false;   // <-- Add this
 
         SceneManager.LoadScene("UI");
     }
@@ -194,5 +205,12 @@ public class Pauser : MonoBehaviour
             AudioListener.volume = 1f;
         }
     }
-
+    void SetAudioListeners(bool enabled)
+    {
+        foreach (AudioListener listener in audioListeners)
+        {
+            if (listener != null)
+                listener.enabled = enabled;
+        }
+    }
 }

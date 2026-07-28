@@ -304,12 +304,11 @@ public class Enemy : MonoBehaviour
             return;
 
         isDead = true;
-      
+
+        if (KillCounter.Instance != null)
+            KillCounter.Instance.EnemyKilled();
 
        
-        // Notify GameManager
-        if (GameManager.Instance != null)
-            GameManager.Instance?.ZombieDied(this);
 
         loopAudio.Stop();
 
@@ -345,7 +344,8 @@ public class Enemy : MonoBehaviour
         }
 
         HasFinishedDeath = true;
-       
+        if (GameManager.Instance != null)
+            GameManager.Instance.ZombieDied(this);
         gameObject.SetActive(false);
         if (playerHitBox != null)
             playerHitBox.ReleaseAttacker(this);
@@ -395,18 +395,21 @@ public class Enemy : MonoBehaviour
     }
     IEnumerator JumpDrop(Transform drop, Vector3 targetPos)
     {
+        if (drop == null)
+            yield break;
+
         Vector3 startPos = drop.position;
 
         float time = 0f;
 
         while (time < dropJumpDuration)
         {
+            if (drop == null)
+                yield break;
+
             float t = time / dropJumpDuration;
 
-            // Horizontal movement
             Vector3 pos = Vector3.Lerp(startPos, targetPos, t);
-
-            // Jump arc
             pos.y += Mathf.Sin(t * Mathf.PI) * dropJumpHeight;
 
             drop.position = pos;
@@ -415,6 +418,7 @@ public class Enemy : MonoBehaviour
             yield return null;
         }
 
-        drop.position = targetPos;
+        if (drop != null)
+            drop.position = targetPos;
     }
 }

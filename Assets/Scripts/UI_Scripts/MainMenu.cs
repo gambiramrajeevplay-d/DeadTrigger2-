@@ -39,6 +39,7 @@ public class MainMenu : MonoBehaviour
     {
         instance = this;
         Time.timeScale = 1f;
+        AudioListener.pause = false;
     }
     private void OnEnable()
     {
@@ -223,6 +224,11 @@ public class MainMenu : MonoBehaviour
     {
         AudioManagerPause.IsMuted = !AudioManagerPause.IsMuted;
         UpdateSoundIcon();
+        AudioManagerPause.Initialize();
+
+        Debug.Log($"Muted: {AudioManagerPause.IsMuted}");
+        Debug.Log($"Volume: {AudioListener.volume}");
+        Debug.Log($"Paused: {AudioListener.pause}");
     }
     void UpdateSoundIcon()
     {

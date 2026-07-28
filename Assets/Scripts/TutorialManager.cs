@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class TutorialManager : MonoBehaviour
 {
@@ -9,13 +8,10 @@ public class TutorialManager : MonoBehaviour
     public GameObject mobileUI;
     public GameObject tvUI;
 
-    [SerializeField] private float tutorialDuration = 5f;
-
     private void Awake()
     {
         Instance = this;
 
-        // Make sure both are hidden initially
         if (mobileUI != null)
             mobileUI.SetActive(false);
 
@@ -25,27 +21,7 @@ public class TutorialManager : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(ShowTutorialRoutine());
-    }
-
-    IEnumerator ShowTutorialRoutine()
-    {
-        Pauser.LockPause();
-
-        if (PlatformManager.Instance.IsTV())
-        {
-            tvUI.SetActive(true);
-            mobileUI.SetActive(false);
-        }
-        else
-        {
-            mobileUI.SetActive(true);
-            tvUI.SetActive(false);
-        }
-
-        yield return new WaitForSecondsRealtime(tutorialDuration);
-
-        HideTutorial();
+        ShowTutorial();
     }
 
     public void ShowTutorial()
@@ -54,13 +30,19 @@ public class TutorialManager : MonoBehaviour
 
         if (PlatformManager.Instance.IsTV())
         {
-            tvUI.SetActive(true);
-            mobileUI.SetActive(false);
+            if (tvUI != null)
+                tvUI.SetActive(true);
+
+            if (mobileUI != null)
+                mobileUI.SetActive(false);
         }
         else
         {
-            mobileUI.SetActive(true);
-            tvUI.SetActive(false);
+            if (mobileUI != null)
+                mobileUI.SetActive(true);
+
+            if (tvUI != null)
+                tvUI.SetActive(false);
         }
     }
 
